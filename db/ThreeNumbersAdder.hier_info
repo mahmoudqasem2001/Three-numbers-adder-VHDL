@@ -1,0 +1,269 @@
+|ThreeNumbersAdder
+X[3] => Stage1:Stg1.X[3]
+X[2] => Stage1:Stg1.X[2]
+X[1] => Stage1:Stg1.X[1]
+X[0] => Stage1:Stg1.X[0]
+Y[3] => Stage1:Stg1.Y[3]
+Y[2] => Stage1:Stg1.Y[2]
+Y[1] => Stage1:Stg1.Y[1]
+Y[0] => Stage1:Stg1.Y[0]
+Z[3] => Stage1:Stg1.Z[3]
+Z[2] => Stage1:Stg1.Z[2]
+Z[1] => Stage1:Stg1.Z[1]
+Z[0] => Stage1:Stg1.Z[0]
+sum[4] << Stage2:Stg2.sum[4]
+sum[3] << Stage2:Stg2.sum[3]
+sum[2] << Stage2:Stg2.sum[2]
+sum[1] << Stage2:Stg2.sum[1]
+sum[0] << Stage2:Stg2.sum[0]
+carry << Stage2:Stg2.carry
+
+
+|ThreeNumbersAdder|Stage1:Stg1
+X[3] => FullAdder:FA4.A
+X[2] => FullAdder:FA3.A
+X[1] => FullAdder:FA2.A
+X[0] => FullAdder:FA1.A
+Y[3] => FullAdder:FA4.B
+Y[2] => FullAdder:FA3.B
+Y[1] => FullAdder:FA2.B
+Y[0] => FullAdder:FA1.B
+Z[3] => FullAdder:FA4.Cin
+Z[2] => FullAdder:FA3.Cin
+Z[1] => FullAdder:FA2.Cin
+Z[0] => FullAdder:FA1.Cin
+S[3] <= FullAdder:FA4.S
+S[2] <= FullAdder:FA3.S
+S[1] <= FullAdder:FA2.S
+S[0] <= FullAdder:FA1.S
+C[3] <= FullAdder:FA4.C
+C[2] <= FullAdder:FA3.C
+C[1] <= FullAdder:FA2.C
+C[0] <= FullAdder:FA1.C
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA1
+A => HalfAdder:HA1.A
+B => HalfAdder:HA1.B
+Cin => HalfAdder:HA2.B
+S <= HalfAdder:HA2.S
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA1|HalfAdder:HA1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA1|HalfAdder:HA2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA2
+A => HalfAdder:HA1.A
+B => HalfAdder:HA1.B
+Cin => HalfAdder:HA2.B
+S <= HalfAdder:HA2.S
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA2|HalfAdder:HA1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA2|HalfAdder:HA2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA3
+A => HalfAdder:HA1.A
+B => HalfAdder:HA1.B
+Cin => HalfAdder:HA2.B
+S <= HalfAdder:HA2.S
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA3|HalfAdder:HA1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA3|HalfAdder:HA2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA4
+A => HalfAdder:HA1.A
+B => HalfAdder:HA1.B
+Cin => HalfAdder:HA2.B
+S <= HalfAdder:HA2.S
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA4|HalfAdder:HA1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage1:Stg1|FullAdder:FA4|HalfAdder:HA2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2
+S[3] => FullAdder:FA3.A
+S[2] => FullAdder:FA2.A
+S[1] => FullAdder:FA1.A
+S[0] => sum[0].DATAIN
+C[3] => FullAdder:FA4.B
+C[2] => FullAdder:FA3.B
+C[1] => FullAdder:FA2.B
+C[0] => FullAdder:FA1.B
+sum[4] <= FullAdder:FA4.S
+sum[3] <= FullAdder:FA3.S
+sum[2] <= FullAdder:FA2.S
+sum[1] <= FullAdder:FA1.S
+sum[0] <= S[0].DB_MAX_OUTPUT_PORT_TYPE
+carry <= FullAdder:FA4.C
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA1
+A => HalfAdder:HA1.A
+B => HalfAdder:HA1.B
+Cin => HalfAdder:HA2.B
+S <= HalfAdder:HA2.S
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA1|HalfAdder:HA1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA1|HalfAdder:HA2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA2
+A => HalfAdder:HA1.A
+B => HalfAdder:HA1.B
+Cin => HalfAdder:HA2.B
+S <= HalfAdder:HA2.S
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA2|HalfAdder:HA1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA2|HalfAdder:HA2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA3
+A => HalfAdder:HA1.A
+B => HalfAdder:HA1.B
+Cin => HalfAdder:HA2.B
+S <= HalfAdder:HA2.S
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA3|HalfAdder:HA1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA3|HalfAdder:HA2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA4
+A => HalfAdder:HA1.A
+B => HalfAdder:HA1.B
+Cin => HalfAdder:HA2.B
+S <= HalfAdder:HA2.S
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA4|HalfAdder:HA1
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ThreeNumbersAdder|Stage2:Stg2|FullAdder:FA4|HalfAdder:HA2
+A => S.IN0
+A => C.IN0
+B => S.IN1
+B => C.IN1
+S <= S.DB_MAX_OUTPUT_PORT_TYPE
+C <= C.DB_MAX_OUTPUT_PORT_TYPE
+
+
